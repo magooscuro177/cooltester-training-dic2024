@@ -1,7 +1,8 @@
 package com.java;
 
+import com.java.modificadores.Modificador;
 
-public class Loops{
+public class Loops extends Modificador{
 
 	public static void main(String[] args) {
 		// WHILE
@@ -42,7 +43,12 @@ public class Loops{
 			
 		}
 		
+Modificador modificador = new Modificador();
+modificador.invokesayHello();
 
+Modificador mod = new Modificador();
+mod.sayHello();
+		
 	}
 
 }
