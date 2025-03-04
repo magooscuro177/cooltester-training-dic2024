@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.google.FirstTest">
+      <class name="com.open.source.Admin">
         <methods>
-          <include name="googleTest"/>
-          <include name="afterTest"/>
+          <include name="TC003_Admin_AddNewUser"/>
           <include name="beforeTest"/>
+          <include name="afterTest"/>
         </methods>
-      </class> <!-- com.google.FirstTest -->
+      </class> <!-- com.open.source.Admin -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -25,7 +25,7 @@ public void beforeTest() {
 
 @Test
 public void facebookTest() {
-	System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver2.exe");
 	driver = new ChromeDriver();
 	
 	driver.get("https://www.facebook.com/");
