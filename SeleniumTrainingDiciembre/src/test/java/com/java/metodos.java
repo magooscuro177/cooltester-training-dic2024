@@ -27,7 +27,17 @@ public class metodos {
 		System.out.println(suma2Numeros);
 		System.out.println(suma3Numeros);
 		System.out.println(isReallyHuman);
-		//System.out.println(suma2NumerosDouble);
+		System.out.println(suma2NumerosDouble);
+		
+		metodos alg = new metodos();
+		alg.algo();
+		
+		metodos obj = new metodos();
+		obj.mostrarMensaje();
+		
+		
+		
+		
 		
 		
 		
@@ -69,7 +79,7 @@ public class metodos {
 		return human;
 	}
 	
-	public static void algo() {
+	public void algo() {
 		printHello();
 		System.out.println(suma(2,2));
 		System.out.println("El es un humano? "+ isHuman());
@@ -87,5 +97,13 @@ public class metodos {
 		System.out.println("Entering password "+ password);
 		System.out.println("Entering token "+ token);
 	}
+	
+	
+		public void mostrarMensaje() {
+			String mensaje= "Hola soy una variable local";
+			System.out.println(mensaje);
+		
+		}
+	
 
 }

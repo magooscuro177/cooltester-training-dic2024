@@ -18,7 +18,7 @@ import org.testng.asserts.SoftAssert;
 
 public class Admin {
 	
-	String username, password, usernameinvalid, msgNoRecords, employeeName;
+	String username, password, usernameinvalid, msgNoRecords, employeeName, addUserName, addPassword;
 
 	public static WebDriver driver;
 
@@ -30,6 +30,9 @@ public class Admin {
 		password = "admin123";
 		usernameinvalid = "xyz";
 		msgNoRecords= "No Records Found";
+		employeeName="James Butler";
+		addUserName="Pedro95";
+		addPassword="1234567a";
 	}
 
 	@Test
@@ -194,16 +197,62 @@ public class Admin {
 			//Step 6
 			Reporter.log("Enter User Role");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div")).click();
+			Thread.sleep(2000);
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div[2]/div[2]")).click();
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			
 			//Step 7
 			Reporter.log("Enter valid Employee Name");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div/input")).sendKeys(employeeName);
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div[2]/div")).click();
 			
 			//Step 8
 			Reporter.log("Enter status");
-			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div/div[2]/i")).click();
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div[2]/div[2]")).click();
+			Thread.sleep(2000);
+			
+			//Step 9
+			Reporter.log("Enter Username");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[4]/div/div[2]/input")).sendKeys(addUserName);
+			
+			//Step 10
+			Reporter.log("Enter new password");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/div[2]/input")).sendKeys(addPassword);
+			
+			//Step 11
+			Reporter.log("Confirm password");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/input")).sendKeys(addPassword);
+			
+			//Step 12
+			Reporter.log("Click Save");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/button[2]")).click();
+			
+			//Step 13
+			Reporter.log("Search username in field \"Username\"");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input")).sendKeys(addUserName);
+			
+			//Step 14
+			Reporter.log("Click Search");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]")).click();
+			Thread.sleep(10000);
+			
+			//Step 15
+			Reporter.log("Verify username exist in table");
+			String verifyAddUser = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[2]/div")).getText();
+			Assert.assertEquals(verifyAddUser, addUserName);
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
+			
+			//Step 16
+			Reporter.log("Log out");
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/span")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a"));
+			Thread.sleep(2000);
+			
 		}
 
 	@AfterTest
