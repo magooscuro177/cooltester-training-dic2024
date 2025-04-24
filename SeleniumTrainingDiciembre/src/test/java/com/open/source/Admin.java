@@ -1,20 +1,20 @@
 package com.open.source;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Admin {
 	
@@ -36,11 +36,12 @@ public class Admin {
 	}
 
 	@Test
-	public void tc001AdminSearchEmployed() {
+	public void tc001AdminSearchEmployed() throws InterruptedException {
 		// Step 1
 		Reporter.log("Open Browser \"OrangeHRM\" web page");
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver2.exe");
-		driver = new ChromeDriver();
+		ChromeOptions chromeOpt = new ChromeOptions();
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver(chromeOpt);
 
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 		driver.manage().window().maximize();
@@ -78,21 +79,27 @@ public class Admin {
 		//Step7
 		Reporter.log("Verify username exist in table");
 		String actualValue = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[2]/div")).getText();
-		Assert.assertEquals(actualValue, "Admin");
+		Assert.assertEquals(actualValue, username);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		
 		//Step 8
 		Reporter.log("Log out");
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/span")).click();
-		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a"));
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a")).click();
+		Thread.sleep(3000);
 		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+		Thread.sleep(3000);
+		driver.close();
 	}
 		@Test
-		public void tc002AdminSearchEmployed() {	
+		public void tc002AdminSearchEmployed() throws InterruptedException {	
 			// Step 1
 			Reporter.log("Open Browser \"OrangeHRM\" web page");
-			System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver2.exe");
-			driver = new ChromeDriver();
+			ChromeOptions chromeOpt = new ChromeOptions();
+			WebDriverManager.chromedriver().setup();
+			WebDriver driver = new ChromeDriver(chromeOpt);
 
 			driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 			driver.manage().window().maximize();
@@ -135,12 +142,16 @@ public class Admin {
 			
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			
-			//Step 8
 			Reporter.log("Log out");
+			Thread.sleep(3000);
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/span")).click();
-			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a"));
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a")).click();
+			Thread.sleep(3000);
 			driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
-
+			Thread.sleep(3000);
+			
+			driver.close();
 		
 		
 //		// Validation - Hard Assertion
@@ -164,9 +175,9 @@ public class Admin {
 		@Test
 		public void TC003_Admin_AddNewUser() throws InterruptedException {	
 			// Step 1
-			Reporter.log("Open Browser \"OrangeHRM\" web page");
-			System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chrome/chromedriver2.exe");
-			driver = new ChromeDriver();
+			ChromeOptions chromeOpt = new ChromeOptions();
+			WebDriverManager.chromedriver().setup();
+			WebDriver driver = new ChromeDriver(chromeOpt);
 
 			driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 			driver.manage().window().maximize();
@@ -250,14 +261,13 @@ public class Admin {
 			Reporter.log("Log out");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/span")).click();
 			Thread.sleep(2000);
-			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a"));
+			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[3]/ul/li/ul/li[4]/a")).click();
 			Thread.sleep(2000);
+			
+			driver.close();
 			
 		}
 
-	@AfterTest
-	public void afterTest() {
-		driver.close();
-	}
+	
 
 }

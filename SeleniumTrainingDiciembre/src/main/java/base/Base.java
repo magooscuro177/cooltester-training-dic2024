@@ -1,5 +1,116 @@
 package base;
 
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Base {
+
+	private WebDriver driver;
+
+	/*
+	 * Constructor
+	 */
+
+	public Base(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void reporterLog(String log) {
+		Reporter.log(log);
+	}
+
+	public WebDriver driverConnection() {
+		ChromeOptions chromeOpt = new ChromeOptions();
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver(chromeOpt);
+		return driver;
+	}
+
+	public void launchBrowser(String url) {
+		try {
+			driver.get(url);
+			driver.manage().window().maximize();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void implicitWait(int time) {
+		try {
+			driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+//	public void explicitWait(By obj, int time) {
+//		try {
+//			WebDriverWait wait = new WebDriverWait(driver,time);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(obj);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	public void hardWait(int milliseconds) {
+		try {
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void sendKeys(By obj, String txtname) {
+		try {
+			driver.findElement(obj).sendKeys(txtname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clickOrange(By obj) {
+		try {
+			driver.findElement(obj).click();
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean objIsDisplayed(By obj) {
+		try {
+			return driver.findElement(obj).isDisplayed();
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void objgetText(By obj, String username, String actualValue) {
+		try {
+			
+			actualValue=driver.findElement(obj).getText();
+			Assert.assertEquals(actualValue, username);
+		}catch(NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+public void driverClose() {
+	driver.close();
+}
+		
+	
+	
+	
+	
 	
 }

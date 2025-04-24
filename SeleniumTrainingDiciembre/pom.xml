@@ -62,6 +62,14 @@
 			<artifactId>extentreports</artifactId>
 			<version>2.41.2</version>
 		</dependency>
+		
+		<!-- Web Driver Manager -->
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+	<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.9.2</version>
+	</dependency>
 
 	</dependencies>
   

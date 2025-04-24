@@ -14,7 +14,7 @@ public String sexo;
 public Perrito(String raza, String tamano, String sexo) {
 	
 	this.raza=raza;
-	this.tamnano=tamano;
+	this.tamano=tamano;
 	this.sexo=sexo;
 	
 }
