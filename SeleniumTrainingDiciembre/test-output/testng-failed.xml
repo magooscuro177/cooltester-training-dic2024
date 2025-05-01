@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.orange.LoginTest">
+      <class name="com.open.source.Admin">
         <methods>
+          <include name="TC005_Admin_CreateUserDisabled"/>
           <include name="beforeTest"/>
-          <include name="afterTest"/>
-          <include name="tc001"/>
         </methods>
-      </class> <!-- com.orange.LoginTest -->
+      </class> <!-- com.open.source.Admin -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

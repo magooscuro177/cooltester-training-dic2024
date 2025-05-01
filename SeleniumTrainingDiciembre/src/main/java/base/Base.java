@@ -1,8 +1,13 @@
 package base;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -101,6 +106,23 @@ public class Base {
 			Assert.assertEquals(actualValue, username);
 		}catch(NoSuchElementException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public String getJSONData(String jsonFileObj, String nestedObjKey, String jsonKey) {
+		try {
+
+			// JSON Data
+			InputStream inputStream = new FileInputStream(GlobalVariables.PATH_JSON_DATA + jsonFileObj + ".json");
+			JSONObject jsonObject = new JSONObject(new JSONTokener(inputStream));
+
+			// Get Data
+			String jsonValue = (String) jsonObject.getJSONObject(nestedObjKey).get(jsonKey);
+			return jsonValue;
+
+		} catch (FileNotFoundException e) {
+			Assert.fail("JSON file is not found");
+			return null;
 		}
 	}
 

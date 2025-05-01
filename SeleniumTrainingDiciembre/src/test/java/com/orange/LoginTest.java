@@ -12,46 +12,51 @@ import poc.DashboardPage;
 import poc.LoginPage;
 
 public class LoginTest {
-	
+
 	WebDriver driver;
 	Base base;
 	LoginPage loginPage;
 	DashboardPage dashboardPage;
 	AdminPage adminPage;
+	String username, password;
+
 	@Test
 	public void tc001() {
-		// Step 1, 2
-		loginPage.LoginOrange("Admin", "admin124");
-		
-		//Step 3
+
+		// Step 3
 		Assert.assertTrue(dashboardPage.isConfirmedLogin(), "User is not logued");
-		
-		//Step 4
+
+		// Step 4
 		dashboardPage.clickAdmin();
-		
-		//Step 5, 6 Search username
-		adminPage.searchUsername("Admin");
-		
+
+		// Step 5, 6 Search username
+		adminPage.searchUsername(username);
+
 		adminPage.clickSearch();
-		
-		//Step 7
-		adminPage.isConfirmedSearchUser("Admin");
-		
-		//Step 8
+
+		// Step 7
+		adminPage.isConfirmedSearchUser(username);
+
+		// Step 8
 		dashboardPage.Logout();
-		
-		
-		
+
 	}
 
 	@BeforeTest
 	public void beforeTest() {
-		base=new Base(driver);
-		driver=base.driverConnection();
-		loginPage=new LoginPage(driver);
-		dashboardPage= new DashboardPage(driver);
-		adminPage= new AdminPage(driver);
-		
+		base = new Base(driver);
+		driver = base.driverConnection();
+		loginPage = new LoginPage(driver);
+		dashboardPage = new DashboardPage(driver);
+		adminPage = new AdminPage(driver);
+		// Set values
+		this.username = base.getJSONData("LoginData", "admin", "username");
+
+		this.password = base.getJSONData("LoginData", "admin", "password");
+
+		// Step 1, 2
+		loginPage.LoginOrange(username, password);
+
 	}
 
 	@AfterTest
